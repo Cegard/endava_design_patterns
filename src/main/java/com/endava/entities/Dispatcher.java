@@ -1,5 +1,6 @@
 package com.endava.entities;
 
+import com.endava.Operations.*;
 import com.endava.controllers.AgentSupplier;
 import com.endava.controllers.PoolManager;
 import com.endava.presentation.UserPresentation;
@@ -18,11 +19,13 @@ public class Dispatcher {
     private PoolManager poolManager;
     private ExecutorService executor;
     private UserPresentation userPresentation;
+    private CreateOperation createOperation;
     private Vector<Client> clients = new Vector<Client>();
     Dispatcher(int numberOfCashiers, int numberOfSupervisors, int numberOfDirectors) {
         poolManager = new PoolManager(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
         executor = Executors.newFixedThreadPool(10);
         userPresentation = new UserPresentation();
+        createOperation = new CreateOperation();
     }
 
     /**
@@ -145,5 +148,19 @@ public class Dispatcher {
         }
     }
 
-}
+    private Operation simulateOperation() {
+        int randomOperation = (int) Math.floor(Math.random() * 3 + 1);
+        Operation operation = null;
+        if (randomOperation == 1) {
+            operation = createOperation.createNewConsultOperation(new Consult());
+        } else if (randomOperation == 2) {
+            operation = createOperation.createNewDepositOperation(new Deposit());
+        } else {
+            operation = createOperation.createNewWithdrawOperation(new Withdraw());
+        }
+        return operation;
+        }
+    }
+
+
 
