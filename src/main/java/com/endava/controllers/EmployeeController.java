@@ -1,9 +1,6 @@
 package com.endava.controllers;
 
-import com.endava.entities.Cashier;
-import com.endava.entities.Director;
-import com.endava.entities.Employee;
-import com.endava.entities.Supervisor;
+import com.endava.entities.*;
 
 import java.util.HashMap;
 
@@ -15,8 +12,8 @@ public class EmployeeController {
 
     public EmployeeController(){
         this.addEmployeeCreationMethod("cashier", () -> Cashier.create());
+        this.addEmployeeCreationMethod("supervisor", () -> Supervisor.create() );
         this.addEmployeeCreationMethod("director", () -> Director.create());
-        this.addEmployeeCreationMethod("cashier", () -> Supervisor.create());
     }
 
 

@@ -37,7 +37,19 @@ public class EmployeesPool {
      * @return the first cashier in the vector poolOfCashierEmployees.
      */
     public Employee getEmployee() {
-        return this.employeesPool.poll();
+
+        return getEmployeeFromQueue();
+    }
+
+
+
+    private Employee getEmployeeFromQueue() {
+        Employee employeeFromQueue = this.employeesPool.poll();
+
+        while (employeeFromQueue == null)
+            employeeFromQueue = this.employeesPool.poll();
+
+        return employeeFromQueue;
     }
 
 

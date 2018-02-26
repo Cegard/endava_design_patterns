@@ -1,24 +1,55 @@
 
 package com.endava.controllers;
+import com.endava.entities.Employee;
+
 import java.util.function.Supplier;
 
 /**
  * This method represents the promise for the completable future that was created by the dispatcher.
  */
-public class AgentSupplier implements Supplier<Double> {
+public class AgentSupplier implements Supplier<Employee> {
+
+    public Employee getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Employee agent) {
+        this.agent = agent;
+    }
+
+    private Employee agent;
+    private double timeToAttend;
+
+
+    public AgentSupplier(Employee agent){
+        this.agent = agent;
+    }
+
 
     /**
      * This method simulate the time of attention of a client, it is define by a random number between 10 to 15 seconds.
      * @return the time that took attend a specific client.
      */
     @Override
-    public Double get() {
-        double timeOfAttention = (Math.floor(Math.random()*5 + 10)) * 1000;
+    public Employee get() {
+        this.timeToAttend = (Math.floor(Math.random()*5 + 10)) * 1000;
+
         try {
-            Thread.sleep((long) timeOfAttention);
+            Thread.sleep((long) this.timeToAttend);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return timeOfAttention/1000;
+
+        return this.agent;
+    }
+
+
+    public double getTimeToAttend() {
+        return timeToAttend;
+    }
+
+
+    public void setTimeToAttend(double timeToAttend) {
+        this.timeToAttend = timeToAttend;
     }
 }

@@ -20,8 +20,8 @@ public class Bank {
         numberOfDirectors = scanner.nextInt();
         System.out.println("Enter the number of clients");
         numberOfClients = scanner.nextInt();
-        Dispatcher dispatcher = new Dispatcher(numberOfCashiers, numberOfSupervisors,numberOfDirectors);
-        dispatcher.attendClient(numberOfClients);
+        Dispatcher dispatcher = new Dispatcher(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
+        dispatcher.attendClients(numberOfClients);
+        dispatcher.stopService();
     }
-
 }
