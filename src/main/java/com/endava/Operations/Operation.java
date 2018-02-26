@@ -1,5 +1,6 @@
 package com.endava.Operations;
 
 public abstract class Operation {
-    public abstract Operation createOperation();
+    public abstract void createOperation();
+    public abstract String getTypeOperation();
 }

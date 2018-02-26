@@ -5,19 +5,29 @@ package com.endava.entities;
  * Every client is identify by a unique id.
  */
 public class Client {
-        private int id;
+        private int customerID;
+        private String customerEmail;
+        private int accountID;
 
-        public Client(int id) {
-            this.id = id;
+        public Client(int customerID, String customerEmail, int accountID) {
+            this.customerID = customerID;
+            this.customerEmail = customerEmail;
+            this.accountID = accountID;
         }
 
-        public int getId() {
-            return id;
+        public int getCustomerID() {
+            return customerID;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setCustomerID(int customerID) {
+            this.customerID = customerID;
         }
 
+        public String getCustomerEmail() { return customerEmail; }
 
+        public void setCustomerEmail(String customerEmail) { this.customerEmail = customerEmail; }
+
+        public int getAccountID() { return accountID; }
+
+        public void setAccountID(int accountID) { this.accountID = accountID; }
 }

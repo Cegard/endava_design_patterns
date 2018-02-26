@@ -4,6 +4,7 @@ import com.endava.Operations.*;
 import com.endava.controllers.AgentSupplier;
 import com.endava.controllers.PoolManager;
 import com.endava.presentation.UserPresentation;
+import com.github.javafaker.Faker;
 
 import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
  * This class is in charge of distribute the clients between the cashiers, supervisors and directors.
  * the dispatcher receive the number of cashiers, supervisors and directors, and also the number of clients that the bank has in the moment.
  */
-public class Dispatcher {
+public class Dispatcher{
     private PoolManager poolManager;
     private ExecutorService executor;
     private UserPresentation userPresentation;
@@ -39,8 +40,8 @@ public class Dispatcher {
                 waitForAEmployee();
             }
             Client client = clients.elementAt(i);
+            Operation clientOperation = simulateOperation();
             assignEmployeeToClient(client);
-
         }
         executor.shutdown();
 
@@ -143,8 +144,11 @@ public class Dispatcher {
      * @param numberOfClients define the number of clients in the bank, that is represented in the size of the vector.
      */
     private void createClients(int numberOfClients){
+
+        Faker faker = new Faker();
         for (int i=0; i<numberOfClients; i++){
-            clients.add(new Client(i));
+            String customerEmail = faker.internet().emailAddress();
+            clients.add(new Client(i, customerEmail, i));
         }
     }
 
@@ -152,12 +156,13 @@ public class Dispatcher {
         int randomOperation = (int) Math.floor(Math.random() * 3 + 1);
         Operation operation = null;
         if (randomOperation == 1) {
-            operation = createOperation.createNewConsultOperation(new Consult());
+            operation = createOperation.createNewConsultOperation();
         } else if (randomOperation == 2) {
-            operation = createOperation.createNewDepositOperation(new Deposit());
+            operation = createOperation.createNewDepositOperation();
         } else {
-            operation = createOperation.createNewWithdrawOperation(new Withdraw());
+            operation = createOperation.createNewWithdrawOperation();
         }
+        System.out.println("Type operation in the dispatcher: "+operation.getTypeOperation());
         return operation;
         }
     }

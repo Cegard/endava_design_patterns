@@ -1,10 +1,15 @@
 package com.endava.Operations;
 
 public class Withdraw extends Operation {
+    private String operationType;
+    @Override
+    public void createOperation() {
+        Operation withdraw = new Withdraw();
+        operationType = "Withdraw";
+    }
 
     @Override
-    public Operation createOperation() {
-        System.out.println("Hola, voy a retirar");
-        return null;
+    public String getTypeOperation() {
+        return operationType;
     }
 }
