@@ -1,48 +1,24 @@
 package com.endava.presentation;
-import com.endava.entities.Cashier;
-import com.endava.entities.Director;
-import com.endava.entities.Supervisor;
-import com.endava.entities.Client;
+import com.endava.entities.*;
 
 /**
  * This class is in charge of present to the user all the information that is generate in the process of assign and attend clients.
  */
 public class UserPresentation {
-    /**
-     * This method shows the information of a specific cashier and his assigned client. Shows what cashier was assigned to what client.
-     * @param cashier represents the cashier that sends the dispatcher and that was assigned to the present client.
-     * @param client represents the client that sends the dispatcher and that was assigned to the present cashier.
-     */
-    public void printInformationOfAssignedCashier(Cashier cashier, Client client){
-        System.out.println("#---------------------------------------------------#");
-        System.out.printf("%35s",""+"  Client: "+client.getId()+".\n");
-        System.out.printf("%40s","Assigned to Cashier: "+cashier.getId()+".\n");
-        System.out.println("#---------------------------------------------------#");
-    }
+
 
     /**
      * This method shows the information of a specific cashier and his assigned client. Shows what cashier was assigned to what client.
-     * @param supervisor represents the supervisor that sends the dispatcher and that was assigned to the present client.
+     * @param employee represents the supervisor that sends the dispatcher and that was assigned to the present client.
      * @param client represents the client that sends the dispatcher and that was assigned to the present supervisor.
      */
-    public void printInformationOfAssignedSupervisor(Supervisor supervisor, Client client){
+    public void printInformationOfAssignedEmployee(Employee employee, Client client){
         System.out.println("#---------------------------------------------------#");
-        System.out.printf("%35s",""+"Client: "+client.getId()+".\n");
-        System.out.printf("%43s","Assigned to Supervisor: "+supervisor.getId()+".\n");
+        System.out.printf("%35s",""+"Client: " + client.getId() + ".\n");
+        System.out.printf("%43s","Assigned to " + employee.getClass().getSimpleName() + ": " +
+                employee.getId()+".\n");
         System.out.println("#---------------------------------------------------#");
 
-    }
-
-    /**
-     * This method shows the information of a specific cashier and his assigned client. Shows what cashier was assigned to what client.
-     * @param director represents the director that sends the dispatcher and that was assigned to the present client.
-     * @param client represents the client that sends the dispatcher and that was assigned to the present director.
-     */
-    public void printInformationOfAssignedDirector(Director director, Client client){
-        System.out.println("#---------------------------------------------------#");
-        System.out.printf("%35s",""+"Client: "+client.getId()+".\n");
-        System.out.printf("%41s","Assigned to Director: "+director.getId()+".\n");
-        System.out.println("#---------------------------------------------------#");
     }
 
     /**

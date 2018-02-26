@@ -1,6 +1,7 @@
 package com.endava.entities;
 
 import com.endava.controllers.AgentSupplier;
+import com.endava.controllers.EmployeesPool;
 import com.endava.controllers.PoolManager;
 import com.endava.presentation.UserPresentation;
 
@@ -15,12 +16,14 @@ import java.util.function.Supplier;
  * the dispatcher receive the number of cashiers, supervisors and directors, and also the number of clients that the bank has in the moment.
  */
 public class Dispatcher {
-    private PoolManager poolManager;
+    private EmployeesPool employeesPool;
     private ExecutorService executor;
     private UserPresentation userPresentation;
     private Vector<Client> clients = new Vector<Client>();
-    Dispatcher(int numberOfCashiers, int numberOfSupervisors, int numberOfDirectors) {
-        poolManager = new PoolManager(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
+
+
+    public Dispatcher(int numberOfCashiers, int numberOfSupervisors, int numberOfDirectors) {
+        employeesPool = new EmployeesPool(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
         executor = Executors.newFixedThreadPool(10);
         userPresentation = new UserPresentation();
     }
@@ -31,6 +34,7 @@ public class Dispatcher {
      */
     public void attendClient(int numberOfClients){
         createClients(numberOfClients);
+        
         for (int i = 0; i<numberOfClients; i++){
             while(!checkEmployeesAvailability()){
                 waitForAEmployee();
@@ -48,13 +52,8 @@ public class Dispatcher {
      * @return true if one of the employees are available and false if all the employees are busy.
      */
     private boolean checkEmployeesAvailability(){
-        boolean cashiersAvailability = poolManager.poolControllerCashier.areEmployeesAvailables();
-        boolean supervisorsAvailability = poolManager.poolControllerSupervisor.areEmployeesAvailables();
-        boolean directorsAvailability = poolManager.poolControllerDirector.areEmployeesAvailables();
-        if(!cashiersAvailability && !supervisorsAvailability && !directorsAvailability){
-            return false;
-        }
-        return true;
+
+        return this.employeesPool.areEmployeesAvailable();
     }
 
     /**
@@ -64,36 +63,20 @@ public class Dispatcher {
      * @param client represent the customer that the attendClient method took from the clients vector.
      */
     private void assignEmployeeToClient(Client client){
-        boolean cashiersAvailability = poolManager.poolControllerCashier.areEmployeesAvailables();
-        boolean supervisorsAvailability = poolManager.poolControllerSupervisor.areEmployeesAvailables();
-        boolean directorsAvailability = poolManager.poolControllerDirector.areEmployeesAvailables();
-
-        if (cashiersAvailability) {
-            Cashier cashierAssigned = (Cashier) poolManager.poolControllerCashier.deleteEmployeeFromPool();
-            userPresentation.printInformationOfAssignedCashier(cashierAssigned, client);
-            attendClientWithCashier(cashierAssigned, client);
-
-        }else if(supervisorsAvailability){
-            Supervisor supervisorAssigned = (Supervisor) poolManager.poolControllerSupervisor.deleteEmployeeFromPool();
-            userPresentation.printInformationOfAssignedSupervisor(supervisorAssigned, client);
-            attendClientWithSupervisor(supervisorAssigned, client);
-
-        }else if (directorsAvailability){
-            Director directorAssigned = (Director) poolManager.poolControllerDirector.deleteEmployeeFromPool();
-            userPresentation.printInformationOfAssignedDirector(directorAssigned,client);
-            attendClientWithDirector(directorAssigned, client);
-        }
+        userPresentation.printInformationOfAssignedEmployee(this.employeesPool.getEmployee(),
+                client);
     }
+
 
     /**
      * This method simulate the attention that a cashier gives to the client
      * @param employee represents the respective cashier that was assigned to the client
      * @param client represent the customer that the cashier will be attend
      */
-    private void attendClientWithCashier(Employee employee, Client client) {
+    private void attend(Employee employee, Client client) {
         Supplier<Double> supplier = new AgentSupplier();
         CompletableFuture.supplyAsync(supplier, executor).thenAccept((timeOfAttention) -> {
-            poolManager.poolControllerCashier.addEmployeeToPool(employee);
+            employeesPool.poolControllerCashier.addEmployeeToPool(employee);
             userPresentation.printTimeSpendWithTheClient(client,timeOfAttention);
         });
     }
@@ -106,7 +89,7 @@ public class Dispatcher {
     private void attendClientWithSupervisor(Employee employee, Client client) {
         Supplier<Double> supplier = new AgentSupplier();
         CompletableFuture.supplyAsync(supplier, executor).thenAccept((timeOfAttention) -> {
-            poolManager.poolControllerSupervisor.addEmployeeToPool(employee);
+            employeesPool.poolControllerSupervisor.addEmployeeToPool(employee);
             userPresentation.printTimeSpendWithTheClient(client,timeOfAttention);
         });
     }
@@ -119,7 +102,7 @@ public class Dispatcher {
     private void attendClientWithDirector(Employee employee, Client client) {
         Supplier<Double> supplier = new AgentSupplier();
         CompletableFuture.supplyAsync(supplier, executor).thenAccept((timeOfAttention) -> {
-            poolManager.poolControllerDirector.addEmployeeToPool(employee);
+            employeesPool.poolControllerDirector.addEmployeeToPool(employee);
             userPresentation.printTimeSpendWithTheClient(client,timeOfAttention);
         });
     }

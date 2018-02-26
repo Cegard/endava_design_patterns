@@ -7,13 +7,14 @@ package com.endava.entities;
 public class Supervisor extends Employee {
 
 
-    private Supervisor(int id){
-        this.id = id;
+    private Supervisor(){
+        Employee.totalEmployeesNumber++;
+        this.initializeAttributes(Employee.totalEmployeesNumber, EmployeeAttentionPriority.SUPERVISOR);
     }
 
 
-    public static Supervisor create(int id) {
-
-        return new Supervisor(id);
+    public static Supervisor create(){
+        Supervisor supervisor =  new Supervisor();
+        return supervisor;
     }
 }
