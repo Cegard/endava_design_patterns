@@ -16,7 +16,7 @@ public class UserPresentation {
     public void printInformationOfAssignedCashier(Cashier cashier, Client client){
         System.out.println("#---------------------------------------------------#");
         System.out.printf("%35s",""+"  Client: "+client.getId()+".\n");
-        System.out.printf("%40s","Assigned to Cashier: "+cashier.id+".\n");
+        System.out.printf("%40s","Assigned to Cashier: "+cashier.getId()+".\n");
         System.out.println("#---------------------------------------------------#");
     }
 
@@ -28,7 +28,7 @@ public class UserPresentation {
     public void printInformationOfAssignedSupervisor(Supervisor supervisor, Client client){
         System.out.println("#---------------------------------------------------#");
         System.out.printf("%35s",""+"Client: "+client.getId()+".\n");
-        System.out.printf("%43s","Assigned to Supervisor: "+supervisor.id+".\n");
+        System.out.printf("%43s","Assigned to Supervisor: "+supervisor.getId()+".\n");
         System.out.println("#---------------------------------------------------#");
 
     }
@@ -41,7 +41,7 @@ public class UserPresentation {
     public void printInformationOfAssignedDirector(Director director, Client client){
         System.out.println("#---------------------------------------------------#");
         System.out.printf("%35s",""+"Client: "+client.getId()+".\n");
-        System.out.printf("%41s","Assigned to Director: "+director.id+".\n");
+        System.out.printf("%41s","Assigned to Director: "+director.getId()+".\n");
         System.out.println("#---------------------------------------------------#");
     }
 
@@ -53,7 +53,8 @@ public class UserPresentation {
     public void printTimeSpendWithTheClient(Client client, double timeOfAttention){
         System.out.println();
         System.out.println("#---------------------------------------------------#");
-        System.out.println("     The Client "+client.getId()+" was attended in: "+timeOfAttention+" seconds.");
+        System.out.println("     The Client "+client.getId()+" was attended in: " +
+                timeOfAttention+" seconds.");
         System.out.println("#---------------------------------------------------#");
         System.out.println();
 

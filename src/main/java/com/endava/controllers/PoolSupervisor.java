@@ -54,7 +54,7 @@ public class PoolSupervisor extends PoolsController {
     @Override
     public void createPools() {
         for (int i = 0 ; i<size; i++){
-            poolOfSupervisorEmployees.add(new Supervisor(i));
+            poolOfSupervisorEmployees.add(Supervisor.create(i));
         }
     }
 

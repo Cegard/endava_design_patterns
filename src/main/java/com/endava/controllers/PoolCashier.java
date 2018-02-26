@@ -53,7 +53,7 @@ public class PoolCashier extends PoolsController {
     @Override
     public void createPools() {
         for (int i = 0 ; i<size; i++){
-            poolOfCashierEmployees.add(new Cashier(i));
+            poolOfCashierEmployees.add(Cashier.create(i));
         }
     }
 }

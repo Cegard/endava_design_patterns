@@ -53,7 +53,7 @@ public class PoolDirector extends PoolsController {
     @Override
     public void createPools() {
         for (int i = 0; i < size; i++) {
-            poolOfDirectorEmployees.add(new Director(i));
+            poolOfDirectorEmployees.add(Director.create(i));
         }
     }
 }

@@ -5,17 +5,15 @@ package com.endava.entities;
  * Every cashier is identify by a unique id.
  */
 public class Cashier extends Employee {
-    public int id;
 
-    public Cashier(int id) {
+
+    private Cashier(int id){
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
+    public static Cashier create(int id){
+
+        return new Cashier(id);
     }
 }

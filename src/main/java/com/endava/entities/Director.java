@@ -5,17 +5,15 @@ package com.endava.entities;
  * Every director is identify by a unique id.
  */
 public class Director extends Employee {
-    public int id;
 
-    public Director(int id) {
+
+    private Director(int id){
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
+    public static Director create(int id){
+
+        return new Director(id);
     }
 }

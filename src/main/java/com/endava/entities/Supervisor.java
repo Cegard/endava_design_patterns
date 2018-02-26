@@ -5,17 +5,15 @@ package com.endava.entities;
  * Every supervisor is identify by a unique id.
  */
 public class Supervisor extends Employee {
-    public int id;
 
-    public Supervisor(int id) {
+
+    private Supervisor(int id){
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
+    public static Supervisor create(int id) {
+
+        return new Supervisor(id);
     }
 }
