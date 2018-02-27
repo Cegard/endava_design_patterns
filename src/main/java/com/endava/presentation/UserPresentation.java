@@ -8,18 +8,22 @@ public class UserPresentation {
 
 
     /**
-     * This method shows the information of a specific cashier and his assigned client. Shows what cashier was assigned to what client.
-     * @param employee represents the supervisor that sends the dispatcher and that was assigned to the present client.
-     * @param client represents the client that sends the dispatcher and that was assigned to the present supervisor.
+     * This method shows the information of an employee and his assigned client.
+     * Shows what bank agent was assigned to what client.
+     * @param employee represents the bank agent that sends the dispatcher and
+     *                 that was assigned to the present client.
+     * @param client represents the client that sends the dispatcher and that
+     *               was assigned to the present bank agent.
      */
     public void printInformationOfAssignedEmployee(Employee employee, Client client){
         System.out.println("#---------------------------------------------------#");
-        System.out.printf("%35s",""+"Client: " + client.getId() + ".\n");
+        System.out.printf("%35s",""+"Client: " + client.getCustomerID() + ".\n");
         System.out.printf("%43s","Assigned to " + employee.getClass().getSimpleName() + ": " +
                 employee.getId()+".\n");
         System.out.println("#---------------------------------------------------#");
 
     }
+
 
     /**
      * This method shows the time that took attend a specific client.
@@ -29,8 +33,9 @@ public class UserPresentation {
     public void printTimeSpendWithTheClient(Client client, double timeOfAttention){
         System.out.println();
         System.out.println("#---------------------------------------------------#");
-        System.out.println("     The Client "+client.getId()+" was attended in: " +
-                timeOfAttention+" seconds.");
+        System.out.println("     The Client "+client.getCustomerID()+" was attended in: " +
+                timeOfAttention + " seconds.");
+
         System.out.println("#---------------------------------------------------#");
         System.out.println();
 

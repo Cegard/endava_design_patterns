@@ -7,14 +7,13 @@ package com.endava.entities;
 public class Director extends Employee {
 
 
-    private Director(){
-        Employee.totalEmployeesNumber++;
-        this.initializeAttributes(Employee.totalEmployeesNumber, EmployeeAttentionPriority.DIRECTOR);
+    private Director(int id){
+        this.initializeAttributes(id, EmployeeAttentionPriority.DIRECTOR);
     }
 
 
-    public static Director create(){
+    public static Director create(int id){
 
-        return new Director();
+        return new Director(id);
     }
 }

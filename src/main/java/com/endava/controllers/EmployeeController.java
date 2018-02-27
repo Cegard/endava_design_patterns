@@ -6,14 +6,14 @@ import java.util.HashMap;
 
 public class EmployeeController {
 
-
+    private static int consecutiveId = 0;
     private HashMap<String, EmployeeCreation> employeesCreationMethods = new HashMap<>();
 
 
     public EmployeeController(){
-        this.addEmployeeCreationMethod("cashier", () -> Cashier.create());
-        this.addEmployeeCreationMethod("supervisor", () -> Supervisor.create() );
-        this.addEmployeeCreationMethod("director", () -> Director.create());
+        this.addEmployeeCreationMethod("cashier", (id) -> Cashier.create(id));
+        this.addEmployeeCreationMethod("supervisor", (id) -> Supervisor.create(id) );
+        this.addEmployeeCreationMethod("director", (id) -> Director.create(id));
     }
 
 
@@ -23,7 +23,7 @@ public class EmployeeController {
 
 
     public Employee createEmployee(String employeeType){
-
-        return this.employeesCreationMethods.get(employeeType).create();
+        EmployeeController.consecutiveId++;
+        return this.employeesCreationMethods.get(employeeType).create(EmployeeController.consecutiveId);
     }
 }

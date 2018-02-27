@@ -7,14 +7,13 @@ package com.endava.entities;
 public class Cashier extends Employee {
 
 
-    private Cashier(){
-        Employee.totalEmployeesNumber++;
-        this.initializeAttributes(Employee.totalEmployeesNumber, EmployeeAttentionPriority.CASHIER);
+    private Cashier(int id){
+        this.initializeAttributes(id, EmployeeAttentionPriority.CASHIER);
     }
 
 
-    public static Cashier create(){
+    public static Cashier create(int id){
 
-        return new Cashier();
+        return new Cashier(id);
     }
 }

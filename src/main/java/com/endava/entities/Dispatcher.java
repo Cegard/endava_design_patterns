@@ -1,8 +1,10 @@
 package com.endava.entities;
 
+import com.endava.Operations.*;
 import com.endava.controllers.AgentSupplier;
 import com.endava.controllers.EmployeesPool;
 import com.endava.presentation.UserPresentation;
+import com.github.javafaker.Faker;
 
 import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +20,7 @@ public class Dispatcher {
     private EmployeesPool employeesPool;
     private ExecutorService executor;
     private UserPresentation userPresentation;
+    private CreateOperation createOperation;
     private Vector<Client> clients = new Vector<Client>();
 
 
@@ -25,6 +28,7 @@ public class Dispatcher {
         employeesPool = new EmployeesPool(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
         executor = Executors.newFixedThreadPool(10);
         userPresentation = new UserPresentation();
+        createOperation = new CreateOperation();
     }
 
     /**
@@ -33,9 +37,12 @@ public class Dispatcher {
      */
     public void attendClients(int numberOfClients){
         this.createClients(numberOfClients);
+        createClients(numberOfClients);
 
-        for (Client client : this.clients)
-            this.attend(client);
+        for (Client client : this.clients){
+            Operation clientOperation = simulateOperation();
+            attend(client);
+        }
     }
 
 
@@ -64,20 +71,36 @@ public class Dispatcher {
     }
 
 
+    public void stopService() {
+        this.executor.shutdown();
+    }
+
+
     /**
      * This method create the vector of clients assigning a unique id for every client in the bank.
      * @param numberOfClients define the number of clients in the bank, that is represented in the size of the vector.
      */
     private void createClients(int numberOfClients){
+        Faker faker = new Faker();
 
-        for (int i = 1; i <= numberOfClients; i++)
-            this.clients.add(new Client(i));
+        for (int i=0; i<numberOfClients; i++){
+            String customerEmail = faker.internet().emailAddress();
+            clients.add(new Client(i, customerEmail, i));
+        }
     }
 
+    private Operation simulateOperation() {
+        int randomOperation = (int) Math.floor(Math.random() * 3 + 1);
+        Operation operation = null;
+        if (randomOperation == 1) {
+            operation = createOperation.createNewConsultOperation();
+        } else if (randomOperation == 2) {
+            operation = createOperation.createNewDepositOperation();
+        } else {
+            operation = createOperation.createNewWithdrawOperation();
+        }
+        System.out.println("Type operation in the dispatcher: "+operation.getTypeOperation());
 
-    public void stopService(){
-        this.executor.shutdown();
+        return operation;
     }
-
 }
-

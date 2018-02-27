@@ -36,18 +36,17 @@ public class EmployeesPool {
      * This method pull the first cashier in the pool for assign him to a client.
      * @return the first cashier in the vector poolOfCashierEmployees.
      */
-    public Employee getEmployee() {
+    private synchronized Employee getEmployeeFromQueue(){
 
-        return getEmployeeFromQueue();
+        return this.employeesPool.poll();
     }
 
 
-
-    private Employee getEmployeeFromQueue() {
+    public Employee getEmployee() {
         Employee employeeFromQueue = this.employeesPool.poll();
 
         while (employeeFromQueue == null)
-            employeeFromQueue = this.employeesPool.poll();
+            employeeFromQueue = this.getEmployeeFromQueue();
 
         return employeeFromQueue;
     }

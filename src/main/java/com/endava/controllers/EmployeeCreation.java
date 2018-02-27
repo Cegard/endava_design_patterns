@@ -4,5 +4,5 @@ import com.endava.entities.Employee;
 
 @FunctionalInterface
 public interface EmployeeCreation {
-    Employee create();
+    Employee create(int id);
 }

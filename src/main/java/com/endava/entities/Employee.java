@@ -7,7 +7,6 @@ public abstract class Employee {
 
     protected int id;
     protected int priority;
-    protected static int totalEmployeesNumber = 0;
 
 
     public int getId() {

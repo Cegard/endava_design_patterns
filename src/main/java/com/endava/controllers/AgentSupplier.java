@@ -32,10 +32,11 @@ public class AgentSupplier implements Supplier<Employee> {
      */
     @Override
     public Employee get() {
-        this.timeToAttend = (Math.floor(Math.random()*5 + 10)) * 1000;
+        this.timeToAttend = (Math.floor(Math.random()*5 + 10));
+        double timeToSleep = timeToAttend * 1000;
 
         try {
-            Thread.sleep((long) this.timeToAttend);
+            Thread.sleep((long) timeToSleep);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
