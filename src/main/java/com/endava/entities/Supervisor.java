@@ -6,14 +6,15 @@ package com.endava.entities;
  */
 public class Supervisor extends Employee {
 
+    private static EmployeeCreation createNewSupervisor = (id -> new Supervisor(id));
+
 
     private Supervisor(int id){
         this.initializeAttributes(id, EmployeeAttentionPriority.SUPERVISOR);
     }
 
 
-    public static Supervisor create(int id){
-        Supervisor supervisor =  new Supervisor(id);
-        return supervisor;
+    public static EmployeeCreation getCreationMethod() {
+        return createNewSupervisor;
     }
 }

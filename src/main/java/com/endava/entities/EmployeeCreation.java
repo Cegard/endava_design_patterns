@@ -1,4 +1,4 @@
-package com.endava.controllers;
+package com.endava.entities;
 import com.endava.entities.Employee;
 
 

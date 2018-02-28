@@ -6,14 +6,15 @@ package com.endava.entities;
  */
 public class Director extends Employee {
 
+    private static EmployeeCreation createNewDirector = (id -> new Director(id));
+
 
     private Director(int id){
         this.initializeAttributes(id, EmployeeAttentionPriority.DIRECTOR);
     }
 
 
-    public static Director create(int id){
-
-        return new Director(id);
+    public static EmployeeCreation getCreationMethod() {
+        return createNewDirector;
     }
 }
