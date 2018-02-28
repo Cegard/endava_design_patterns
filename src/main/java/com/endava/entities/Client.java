@@ -9,11 +9,17 @@ public class Client {
         private String customerEmail;
         private int accountID;
 
-        public Client(int customerID, String customerEmail, int accountID) {
+        private Client(int customerID, String customerEmail, int accountID) {
             this.customerID = customerID;
             this.customerEmail = customerEmail;
             this.accountID = accountID;
         }
+
+
+        public static Client createNewClient(int customerId, String email, int accountId){
+            return new Client(customerId, email, accountId);
+        }
+
 
         public int getCustomerID() {
             return customerID;

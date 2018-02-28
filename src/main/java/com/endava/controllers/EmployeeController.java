@@ -11,9 +11,9 @@ public class EmployeeController {
 
 
     public EmployeeController(){
-        this.addEmployeeCreationMethod("cashier", (id) -> Cashier.create(id));
-        this.addEmployeeCreationMethod("supervisor", (id) -> Supervisor.create(id) );
-        this.addEmployeeCreationMethod("director", (id) -> Director.create(id));
+        this.addEmployeeCreationMethod("cashier", Cashier.getCreationMethod());
+        this.addEmployeeCreationMethod("supervisor", Supervisor.getCreationMethod());
+        this.addEmployeeCreationMethod("director", Director.getCreationMethod());
     }
 
 

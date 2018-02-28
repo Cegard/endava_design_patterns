@@ -6,14 +6,15 @@ package com.endava.entities;
  */
 public class Cashier extends Employee {
 
+    private static EmployeeCreation createNewCashier = (id -> new Cashier(id));
+
 
     private Cashier(int id){
         this.initializeAttributes(id, EmployeeAttentionPriority.CASHIER);
     }
 
 
-    public static Cashier create(int id){
-
-        return new Cashier(id);
+    public static EmployeeCreation getCreationMethod() {
+        return createNewCashier;
     }
 }

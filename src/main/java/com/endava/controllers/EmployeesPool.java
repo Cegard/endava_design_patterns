@@ -1,6 +1,5 @@
 package com.endava.controllers;
 
-import com.endava.entities.Cashier;
 import com.endava.entities.Employee;
 import com.endava.entities.EmployeePriorityComparator;
 
