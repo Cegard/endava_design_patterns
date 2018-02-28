@@ -1,12 +1,11 @@
-package com.endava.entities;
+package com.endava.AppClient;
+
+import com.endava.controllers.Dispatcher;
+import com.endava.presentation.Bank;
 
 import java.util.Scanner;
 
-/**
- * This class is in charge for ask the data to instance the bank and send it to the dispatcher.
- * Ask for the number of every type of employees and for the number of clients in the bank.
- */
-public class Bank {
+public class BaseMain {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -20,10 +19,8 @@ public class Bank {
         numberOfDirectors = scanner.nextInt();
         System.out.println("Enter the number of clients");
         numberOfClients = scanner.nextInt();
-//        Dispatcher dispatcher = new Dispatcher(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
-        Dispatcher dispatcher = Dispatcher.getInstance();
-        dispatcher.addNewAgents(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
-        dispatcher.attendClients(numberOfClients);
-        dispatcher.stopService();
+        Bank bank = new Bank(numberOfCashiers, numberOfSupervisors, numberOfDirectors, numberOfClients);
+        bank.attendClients();
+        bank.stopService();
     }
 }
