@@ -1,8 +1,9 @@
 package com.endava.entities.Operations;
 
-import java.util.Random;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class Withdraw extends Operation {
     private String operationType;
@@ -15,11 +16,12 @@ public class Withdraw extends Operation {
     }
 
 
+
     @Override
     protected void initializeAttributes() {
         this.operationType = "Withdraw";
-        this.transactionValue = getTransactionValue();
-        this.transactionDate = getTransactionDate();
+        this.transactionValue = setTransactionValue();
+        this.transactionDate = setTransactionDate();
     }
 
 
@@ -28,12 +30,23 @@ public class Withdraw extends Operation {
         return operationType;
     }
 
-    private double getTransactionValue() {
+    @Override
+    public String getOperationDate() {
+        return transactionDate;
+    }
+
+    @Override
+    public Double getOperationValue() {
+        return transactionValue;
+    }
+
+
+    private double setTransactionValue() {
         Random rnd = new Random();
         return  (rnd.nextDouble()*20000+1);
     }
 
-    private String getTransactionDate() {
+    private String setTransactionDate() {
         Calendar date = GregorianCalendar.getInstance();
         String actualDate = date.getTime().toString();
         return actualDate;

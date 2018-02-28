@@ -26,11 +26,13 @@ public class ConcreteMessageService implements MessageService {
         }
     }
 
-    public void sendTransactionMessageToSubscribers(Client customer, Employee agent) {
+    @Override
+    public void createMessage(Client customer, Employee agent) {
         Message transactionMessage = new TransactionMessage();
         transactionMessage.constructMessage(customer,agent);
         notifySubscribers(transactionMessage);
     }
+
 
 
 }
