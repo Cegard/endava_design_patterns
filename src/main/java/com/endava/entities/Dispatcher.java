@@ -3,6 +3,8 @@ package com.endava.entities;
 import com.endava.Operations.*;
 import com.endava.controllers.AgentSupplier;
 import com.endava.controllers.EmployeesPool;
+import com.endava.message.ConcreteMessageService;
+import com.endava.message.MessageService;
 import com.endava.presentation.UserPresentation;
 import com.github.javafaker.Faker;
 
@@ -45,17 +47,6 @@ public class Dispatcher {
         }
     }
 
-
-    /**
-     * This method check for the disponibility of cashiers, supervisor and directors, at least one of them should be available.
-     * @return true if one of the employees are available and false if all the employees are busy.
-     */
-    private boolean checkEmployeesAvailability(){
-
-        return this.employeesPool.areEmployeesAvailable();
-    }
-
-
     /**
      * This method simulate the attention that a cashier gives to the client
      * @param client represent the customer that the cashier will be attend
@@ -93,11 +84,11 @@ public class Dispatcher {
         int randomOperation = (int) Math.floor(Math.random() * 3 + 1);
         Operation operation = null;
         if (randomOperation == 1) {
-            operation = createOperation.createNewConsultOperation();
+            operation = CreateOperation.createNewConsultOperation();
         } else if (randomOperation == 2) {
-            operation = createOperation.createNewDepositOperation();
+            operation = CreateOperation.createNewDepositOperation();
         } else {
-            operation = createOperation.createNewWithdrawOperation();
+            operation = CreateOperation.createNewWithdrawOperation();
         }
         System.out.println("Type operation in the dispatcher: "+operation.getTypeOperation());
 
