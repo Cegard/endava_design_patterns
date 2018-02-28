@@ -1,7 +1,8 @@
 package com.endava.presentation;
 
-import com.endava.Operations.CreateOperation;
-import com.endava.Operations.Operation;
+import com.endava.controllers.OperationController;
+import com.endava.entities.Operations.OperationCreation;
+import com.endava.entities.Operations.Operation;
 import com.endava.controllers.ClientController;
 import com.endava.controllers.Dispatcher;
 import com.endava.entities.Client;
@@ -14,7 +15,6 @@ import java.util.Vector;
  * Ask for the number of every type of employees and for the number of clients in the bank.
  */
 public class Bank {
-    private CreateOperation createOperation;
     private Vector<Client> clients = new Vector<Client>();
     private Dispatcher dispatcher = Dispatcher.getInstance();
 
@@ -31,10 +31,8 @@ public class Bank {
      */
     public void attendClients(){
 
-        for (Client client : this.clients){
-            Operation clientOperation = simulateOperation();
+        for (Client client : this.clients)
             dispatcher.attend(client);
-        }
     }
 
 
@@ -44,27 +42,12 @@ public class Bank {
      */
     private void createClients(int numberOfClients){
         Faker faker = new Faker();
+        OperationController operationController = new OperationController();
 
         for (int i=0; i<numberOfClients; i++){
             String customerEmail = faker.internet().emailAddress();
-            clients.add(ClientController.createClient(i, customerEmail, i));
+            clients.add(ClientController.createClient(i, customerEmail, i, operationController.createNewOperation()));
         }
-    }
-
-
-    private Operation simulateOperation() {
-        int randomOperation = (int) Math.floor(Math.random() * 3 + 1);
-        Operation operation = null;
-        if (randomOperation == 1) {
-            operation = CreateOperation.createNewConsultOperation();
-        } else if (randomOperation == 2) {
-            operation = CreateOperation.createNewDepositOperation();
-        } else {
-            operation = CreateOperation.createNewWithdrawOperation();
-        }
-        System.out.println("Type operation in the dispatcher: "+operation.getTypeOperation());
-
-        return operation;
     }
 
 

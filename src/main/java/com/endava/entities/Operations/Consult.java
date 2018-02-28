@@ -1,4 +1,4 @@
-package com.endava.Operations;
+package com.endava.entities.Operations;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -6,12 +6,20 @@ import java.util.GregorianCalendar;
 public class Consult extends Operation {
     private String operationType;
     private String transactionDate;
-    @Override
-    public void createOperation() {
-        Operation consult = new Consult();
-        operationType = "Consult";
-        transactionDate = setTransactionDate();
+    private static OperationCreation creationMethod = () -> new Consult();
+
+
+    private Consult(){
+        this.initializeAttributes();
     }
+
+
+    @Override
+    protected void initializeAttributes() {
+        this.operationType = "Consult";
+        this.transactionDate = setTransactionDate();
+    }
+
 
     @Override
     public String getTypeOperation() {
@@ -34,4 +42,9 @@ public class Consult extends Operation {
         return actualDate;
     }
 
+
+    public static OperationCreation getCreationMethod(){
+
+        return creationMethod;
+    }
 }

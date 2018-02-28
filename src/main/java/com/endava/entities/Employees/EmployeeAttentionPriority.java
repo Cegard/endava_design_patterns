@@ -1,4 +1,4 @@
-package com.endava.entities;
+package com.endava.entities.Employees;
 
 public enum EmployeeAttentionPriority {
 

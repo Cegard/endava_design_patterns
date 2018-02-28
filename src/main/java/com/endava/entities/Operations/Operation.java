@@ -1,10 +1,8 @@
-package com.endava.Operations;
+package com.endava.entities.Operations;
 
 public abstract class Operation {
-    public abstract void createOperation();
+    protected abstract void initializeAttributes();
     public abstract String getTypeOperation();
     public abstract String getOperationDate();
     public abstract Double getOperationValue();
-
-
 }

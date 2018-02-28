@@ -1,7 +1,7 @@
 package com.endava.message;
 
 import com.endava.entities.Client;
-import com.endava.entities.Employee;
+import com.endava.entities.Employees.Employee;
 
 public interface MessageService {
     public void addSubscriber(Subscriber subscriber);
