@@ -9,9 +9,9 @@ public class TransactionMessage extends Message {
     private int agentID;
     private String messageType;
     private int customerAccountID;
-    private String transationDate;
+    private String transactionDate;
     private double transactionValue;
-    private String transationType;
+    private String transactionType;
 
 
     @Override
@@ -39,15 +39,15 @@ public class TransactionMessage extends Message {
         return customerAccountID;
     }
 
-    public String getTransationDate() {
-        return transationDate;
+    public String getTransactionDate() {
+        return transactionDate;
     }
 
     public double getTransactionValue() {
         return transactionValue;
     }
 
-    public String getTransationType() {
-        return transationType;
+    public String getTransactionType() {
+        return transactionType;
     }
 }
