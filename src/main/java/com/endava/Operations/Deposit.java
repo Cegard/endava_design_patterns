@@ -12,9 +12,9 @@ public class Deposit extends Operation {
     @Override
     public void createOperation() {
         Operation deposit = new Deposit();
-        operationType = "Deposit";
-        transactionValue = getTransactionValue();
-        transactionDate = getTransactionDate();
+        this.operationType = "Deposit";
+        this.transactionValue = setTransactionValue();
+        this.transactionDate = setTransactionDate();
     }
 
     @Override
@@ -22,12 +22,22 @@ public class Deposit extends Operation {
         return operationType;
     }
 
-    private double getTransactionValue() {
+    @Override
+    public String getOperationDate() {
+        return transactionDate;
+    }
+
+    @Override
+    public Double getOperationValue() {
+        return transactionValue;
+    }
+
+    private double setTransactionValue() {
         Random rnd = new Random();
         return  (rnd.nextDouble()*20000+1);
     }
 
-    private String getTransactionDate() {
+    private String setTransactionDate() {
         Calendar date = GregorianCalendar.getInstance();
         String actualDate = date.getTime().toString();
         return actualDate;

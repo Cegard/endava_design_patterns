@@ -1,5 +1,6 @@
 package com.endava.message;
 
+import com.endava.Operations.Withdraw;
 import com.endava.entities.Client;
 import com.endava.entities.Employee;
 
@@ -16,6 +17,14 @@ public class TransactionMessage extends Message {
 
     @Override
     public void constructMessage(Client customer, Employee agent) {
+        this.customerId = String.valueOf(customer.getCustomerID());
+        this.customerEmail = customer.getCustomerEmail();
+        this.agentID = agent.getId();
+        this.messageType = "Transaction Message";
+        this.customerAccountID = customer.getAccountID();
+        this.transactionDate = customer.getTransaction().getOperationDate();
+        this.transactionValue = customer.getTransaction().getOperationValue();
+        this.transactionType = customer.getTransaction().getTypeOperation();
 
     }
 

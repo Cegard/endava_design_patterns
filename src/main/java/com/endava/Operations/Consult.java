@@ -10,7 +10,7 @@ public class Consult extends Operation {
     public void createOperation() {
         Operation consult = new Consult();
         operationType = "Consult";
-        transactionDate = getTransactionDate();
+        transactionDate = setTransactionDate();
     }
 
     @Override
@@ -18,7 +18,17 @@ public class Consult extends Operation {
         return operationType;
     }
 
-    private String getTransactionDate() {
+    @Override
+    public String getOperationDate() {
+        return transactionDate;
+    }
+
+    @Override
+    public Double getOperationValue() {
+        return 0.0;
+    }
+
+    private String setTransactionDate() {
         Calendar date = GregorianCalendar.getInstance();
         String actualDate = date.getTime().toString();
         return actualDate;
