@@ -1,13 +1,12 @@
 package com.endava.legacy;
 
+import com.endava.message.Subscriber;
+
 /**
  * Created by gleon on 2/13/2018.
  */
-abstract public class MktService {
-    public void updateInformation(String customerID, Double transactionValue, String email) {
-        System.out.println("Check value :" + transactionValue);
-        this.sendAD(customerID, email);
-    }
+public abstract class MktService implements Subscriber {
+    public abstract void updateInformation(String customerID, Double transactionValue, String email);
 
-    abstract public void sendAD(String CustomerID, String email);
+    public abstract void sendAD(String CustomerID, String email);
 }
