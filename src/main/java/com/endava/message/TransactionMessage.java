@@ -4,7 +4,7 @@ import com.endava.entities.Client;
 import com.endava.entities.Employee;
 
 public class TransactionMessage extends Message {
-    private int customerId;
+    private String customerId;
     private String customerEmail;
     private int agentID;
     private String messageType;
@@ -19,7 +19,7 @@ public class TransactionMessage extends Message {
 
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
