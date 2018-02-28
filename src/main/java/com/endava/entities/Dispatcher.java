@@ -25,13 +25,23 @@ public class Dispatcher {
     private CreateOperation createOperation;
     private Vector<Client> clients = new Vector<Client>();
 
+    //Singleton nexted
+    private static Dispatcher instance = new Dispatcher();
 
-    public Dispatcher(int numberOfCashiers, int numberOfSupervisors, int numberOfDirectors) {
-        employeesPool = new EmployeesPool(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
-        executor = Executors.newFixedThreadPool(10);
+    private Dispatcher() {
+        this.employeesPool = EmployeesPool.getInstance();
         userPresentation = new UserPresentation();
         createOperation = new CreateOperation();
+        executor = Executors.newFixedThreadPool(10);
     }
+
+    public void addNewAgents(int cashiers, int supervisors, int directors){
+        this.employeesPool.addNumberOfAgentsTypeToPool(cashiers, "cashier");
+        this.employeesPool.addNumberOfAgentsTypeToPool(supervisors, "supervisor");
+        this.employeesPool.addNumberOfAgentsTypeToPool(directors, "director");
+    }
+
+    public static Dispatcher getInstance(){ return instance; }
 
     /**
      * This method take every client of the vector clients and proceed to attend him.
