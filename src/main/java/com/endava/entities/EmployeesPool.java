@@ -1,5 +1,6 @@
-package com.endava.controllers;
+package com.endava.entities;
 
+import com.endava.controllers.EmployeeController;
 import com.endava.entities.Employees.Employee;
 import com.endava.entities.Employees.EmployeePriorityComparator;
 
@@ -9,22 +10,24 @@ import java.util.PriorityQueue;
  * This class define and control the structure that contains all the cashiers in the bank.
  */
 public class EmployeesPool {
-    private EmployeeController employeesController = new EmployeeController();
     private EmployeePriorityComparator employeesComparator = new EmployeePriorityComparator();
-    private PriorityQueue<Employee> employeesPool = new PriorityQueue<>(employeesComparator);
-    //Singleton
-    private static EmployeesPool instance = new EmployeesPool();
+    public PriorityQueue<Employee> employeesPool;
 
-    private EmployeesPool(){
-        }
 
-    public static EmployeesPool getInstance(){ return instance; }
+    public EmployeesPool(){
+        employeesPool = new PriorityQueue<>(employeesComparator);
+    }
 
     /**
      * This method add one cashier to the pool of cashiers.
      * @param employee represent the type of employee that will be add to the pool of cashiers
      */
-    public void addEmployeeToPool(Employee employee) {
+    public void addEmployee(Employee employee){
+        this.addEmployeeToPool(employee);
+    }
+
+
+    private void addEmployeeToPool(Employee employee){
         this.employeesPool.add(employee);
     }
 
@@ -34,13 +37,12 @@ public class EmployeesPool {
      * @return the first cashier in the vector poolOfCashierEmployees.
      */
     private synchronized Employee getEmployeeFromQueue(){
-
         return this.employeesPool.poll();
     }
 
 
     public Employee getEmployee() {
-        Employee employeeFromQueue = this.employeesPool.poll();
+        Employee employeeFromQueue = this.getEmployeeFromQueue();
 
         while (employeeFromQueue == null)
             employeeFromQueue = this.getEmployeeFromQueue();
@@ -55,15 +57,5 @@ public class EmployeesPool {
      */
     public boolean areEmployeesAvailable() {
         return (employeesPool.isEmpty());
-    }
-
-
-    /**
-     * This method create cashiers and add them to the vector poolOfCashierEmployees.
-     */
-    public void addNumberOfAgentsTypeToPool(int numberOfAgents, String type){
-
-        for (int i = 0 ; i < numberOfAgents; i++)
-            this.addEmployeeToPool(employeesController.createEmployee(type));
     }
 }

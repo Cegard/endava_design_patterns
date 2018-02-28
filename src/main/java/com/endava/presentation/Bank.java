@@ -1,8 +1,8 @@
 package com.endava.presentation;
 
+import com.endava.controllers.EmployeeController;
+import com.endava.entities.EmployeesPool;
 import com.endava.controllers.OperationController;
-import com.endava.entities.Operations.OperationCreation;
-import com.endava.entities.Operations.Operation;
 import com.endava.controllers.ClientController;
 import com.endava.controllers.Dispatcher;
 import com.endava.entities.Client;
@@ -17,11 +17,16 @@ import java.util.Vector;
 public class Bank {
     private Vector<Client> clients = new Vector<Client>();
     private Dispatcher dispatcher = Dispatcher.getInstance();
+    private EmployeeController employeeController;
+    private static OperationController operationController = new OperationController();
 
 
     public Bank(int numberOfCashiers, int numberOfSupervisors, int numberOfDirectors, int numberOfClients){
-        this.dispatcher.addNewAgents(numberOfCashiers, numberOfSupervisors, numberOfDirectors);
+        this.employeeController = new EmployeeController();
         this.createClients(numberOfClients);
+        this.createMultipleEmployeesOfSpecifiedType(numberOfCashiers, "cashier");
+        this.createMultipleEmployeesOfSpecifiedType(numberOfSupervisors, "supervisor");
+        this.createMultipleEmployeesOfSpecifiedType(numberOfDirectors, "director");
     }
 
 
@@ -32,7 +37,7 @@ public class Bank {
     public void attendClients(){
 
         for (Client client : this.clients)
-            dispatcher.attend(client);
+            dispatcher.attend(client, employeeController);
     }
 
 
@@ -42,12 +47,18 @@ public class Bank {
      */
     private void createClients(int numberOfClients){
         Faker faker = new Faker();
-        OperationController operationController = new OperationController();
 
-        for (int i=0; i<numberOfClients; i++){
+        for (int i = 1; i <= numberOfClients; i++){
             String customerEmail = faker.internet().emailAddress();
             clients.add(ClientController.createClient(i, customerEmail, i, operationController.createNewOperation()));
         }
+    }
+
+
+    private void createMultipleEmployeesOfSpecifiedType(int numberOfEmployees, String type){
+
+        for (int i = 0; i < numberOfEmployees; i++)
+            this.employeeController.createEmployee(type);
     }
 
 

@@ -1,6 +1,7 @@
 package com.endava.controllers;
 
 import com.endava.entities.Employees.*;
+import com.endava.entities.EmployeesPool;
 
 import java.util.HashMap;
 
@@ -9,9 +10,11 @@ public class EmployeeController {
 
     private static int consecutiveId = 0;
     private HashMap<String, EmployeeCreation> employeesCreationMethods = new HashMap<>();
+    public EmployeesPool employeesPool;
 
 
     public EmployeeController(){
+        this.employeesPool = new EmployeesPool();
         this.addEmployeeCreationMethod("cashier", Cashier.getCreationMethod());
         this.addEmployeeCreationMethod("supervisor", Supervisor.getCreationMethod());
         this.addEmployeeCreationMethod("director", Director.getCreationMethod());
@@ -25,6 +28,20 @@ public class EmployeeController {
 
     public Employee createEmployee(String employeeType){
         EmployeeController.consecutiveId++;
-        return this.employeesCreationMethods.get(employeeType).create(EmployeeController.consecutiveId);
+        Employee newEmployee = this.employeesCreationMethods.get(employeeType).create(EmployeeController.consecutiveId);
+        this.addEmployeeToPool(newEmployee);
+
+        return newEmployee;
+    }
+
+
+    public Employee getFreeAgent(){
+
+        return this.employeesPool.getEmployee();
+    }
+
+
+    public void addEmployeeToPool(Employee agent){
+        this.employeesPool.addEmployee(agent);
     }
 }
