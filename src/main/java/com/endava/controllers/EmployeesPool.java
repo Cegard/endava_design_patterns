@@ -14,14 +14,13 @@ public class EmployeesPool {
     private EmployeeController employeesController = new EmployeeController();
     private EmployeePriorityComparator employeesComparator = new EmployeePriorityComparator();
     private PriorityQueue<Employee> employeesPool = new PriorityQueue<>(employeesComparator);
+    //Singleton
+    private static EmployeesPool instance = new EmployeesPool();
 
+    private EmployeesPool(){
+        }
 
-    public EmployeesPool(int cashiers, int supervisors, int directors){
-        addNumberOfAgentsTypeToPool(cashiers, "cashier");
-        addNumberOfAgentsTypeToPool(supervisors, "supervisor");
-        addNumberOfAgentsTypeToPool(directors, "director");
-    }
-
+    public static EmployeesPool getInstance(){ return instance; }
 
     /**
      * This method add one cashier to the pool of cashiers.
@@ -64,7 +63,7 @@ public class EmployeesPool {
     /**
      * This method create cashiers and add them to the vector poolOfCashierEmployees.
      */
-    private void addNumberOfAgentsTypeToPool(int numberOfAgents, String type){
+    public void addNumberOfAgentsTypeToPool(int numberOfAgents, String type){
 
         for (int i = 0 ; i < numberOfAgents; i++)
             this.addEmployeeToPool(employeesController.createEmployee(type));
