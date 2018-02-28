@@ -1,20 +1,26 @@
-package com.endava.Operations;
+package com.endava.entities.Operations;
 
 import java.util.Random;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Withdraw extends Operation {
+public class Deposit extends Operation {
     private String operationType;
     private double transactionValue;
     private String transactionDate;
+    private static OperationCreation creationMethod = () -> new Deposit();
+
+
+    private Deposit(){
+        this.initializeAttributes();
+    }
+
 
     @Override
-    public void createOperation() {
-        Operation withdraw = new Withdraw();
-        operationType = "Withdraw";
-        transactionValue = getTransactionValue();
-        transactionDate = getTransactionDate();
+    protected void initializeAttributes() {
+        this.operationType = "Deposit";
+        this.transactionValue = getTransactionValue();
+        this.transactionDate = getTransactionDate();
     }
 
     @Override
@@ -32,4 +38,11 @@ public class Withdraw extends Operation {
         String actualDate = date.getTime().toString();
         return actualDate;
     }
+
+
+    public static OperationCreation getCreationMethod(){
+
+        return creationMethod;
+    }
+
 }

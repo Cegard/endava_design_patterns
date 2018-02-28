@@ -1,8 +1,9 @@
 package com.endava.controllers;
 
-import com.endava.entities.*;
+import com.endava.entities.Employees.*;
 
 import java.util.HashMap;
+
 
 public class EmployeeController {
 

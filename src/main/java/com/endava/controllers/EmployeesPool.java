@@ -1,10 +1,9 @@
 package com.endava.controllers;
 
-import com.endava.entities.Employee;
-import com.endava.entities.EmployeePriorityComparator;
+import com.endava.entities.Employees.Employee;
+import com.endava.entities.Employees.EmployeePriorityComparator;
 
 import java.util.PriorityQueue;
-import java.util.Vector;
 
 /**
  * This class define and control the structure that contains all the cashiers in the bank.

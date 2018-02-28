@@ -1,4 +1,4 @@
-package com.endava.Operations;
+package com.endava.controllers;
 
 import com.endava.message.Message;
 import com.endava.message.Subscriber;

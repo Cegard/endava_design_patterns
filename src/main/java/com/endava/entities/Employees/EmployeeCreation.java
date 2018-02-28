@@ -1,5 +1,4 @@
-package com.endava.entities;
-import com.endava.entities.Employee;
+package com.endava.entities.Employees;
 
 
 @FunctionalInterface

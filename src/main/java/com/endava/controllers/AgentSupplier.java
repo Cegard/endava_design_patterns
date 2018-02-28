@@ -1,6 +1,6 @@
 
 package com.endava.controllers;
-import com.endava.entities.Employee;
+import com.endava.entities.Employees.Employee;
 
 import java.util.function.Supplier;
 
