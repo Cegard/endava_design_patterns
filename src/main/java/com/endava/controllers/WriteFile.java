@@ -18,7 +18,7 @@ public class WriteFile {
         String month = String.valueOf(gregorianCalendar.get(GregorianCalendar.MONTH)+1);
         String day = String.valueOf(gregorianCalendar.get(GregorianCalendar.DAY_OF_MONTH));
         String year = String.valueOf(gregorianCalendar.get(GregorianCalendar.YEAR));
-        String fileName = "DEPOSITSTOREVIEW-"+"0"+month+day+year+".txt";
+        String fileName = "DEPOSITSTOREVIEW-"+"0"+month+"0"+day+year+".txt";
         try{
             fileWriter = new FileWriter(fileName, true);
             pw = new PrintWriter(fileWriter);
