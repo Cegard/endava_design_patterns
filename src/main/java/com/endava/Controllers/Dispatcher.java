@@ -1,9 +1,10 @@
 package com.endava.Controllers;
 
 import com.endava.Entities.Client;
-
 import com.endava.Entities.message.ConcreteMessageService;
 import com.endava.Entities.message.MessageService;
+import com.endava.legacy.CuponMktService;
+import com.endava.legacy.MktService;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,6 +23,7 @@ public class Dispatcher {
     private Dispatcher() {
         executor = Executors.newFixedThreadPool(10);
         messageService = new ConcreteMessageService();
+        addSubscribers();
     }
 
     public static Dispatcher getInstance(){ return instance; }
@@ -41,6 +43,12 @@ public class Dispatcher {
         });
     }
 
+    public void addSubscribers (){
+        AuditModule auditModule = new AuditModule();
+        MktService mktService = new CuponMktService();
+        messageService.addSubscriber(auditModule);
+        messageService.addSubscriber(mktService);
+    }
 
     public void shutdownExecutor() {
         this.executor.shutdown();

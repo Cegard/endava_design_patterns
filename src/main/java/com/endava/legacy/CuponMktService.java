@@ -19,7 +19,7 @@ public class CuponMktService extends MktService {
     }
 
     public void sendAD(String CustomerID, String email) {
-        System.out.print("Sending Coupons to "+ CustomerID +" with email " +email);
+        System.out.println("Sending Coupons to customer "+ CustomerID +" with email " +email);
     }
 
 }
