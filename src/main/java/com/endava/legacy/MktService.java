@@ -1,6 +1,6 @@
 package com.endava.legacy;
 
-import com.endava.message.Subscriber;
+import com.endava.Entities.message.Subscriber;
 
 /**
  * Created by gleon on 2/13/2018.
