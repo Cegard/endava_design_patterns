@@ -1,7 +1,6 @@
 package com.endava.AppClient;
 
-import com.endava.controllers.Dispatcher;
-import com.endava.presentation.Bank;
+import com.endava.Presentation.Bank;
 
 import java.util.Scanner;
 

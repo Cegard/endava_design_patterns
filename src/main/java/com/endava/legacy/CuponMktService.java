@@ -1,7 +1,7 @@
 package com.endava.legacy;
 
-import com.endava.message.Message;
-import com.endava.message.TransactionMessage;
+import com.endava.Entities.Message.Message;
+import com.endava.Entities.Message.TransactionMessage;
 
 /**
  * Created by gleon on 2/13/2018.

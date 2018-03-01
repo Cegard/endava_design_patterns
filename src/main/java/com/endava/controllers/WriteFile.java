@@ -1,10 +1,8 @@
-package com.endava.controllers;
+package com.endava.Controllers;
 
 
-import com.endava.message.Message;
-import com.endava.message.TransactionMessage;
-
-import java.io.File;
+import com.endava.Entities.Message.Message;
+import com.endava.Entities.Message.TransactionMessage;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.GregorianCalendar;
