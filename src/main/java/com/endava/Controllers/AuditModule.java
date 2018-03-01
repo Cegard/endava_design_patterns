@@ -1,8 +1,8 @@
 package com.endava.Controllers;
 
-import com.endava.Entities.message.Message;
-import com.endava.Entities.message.Subscriber;
-import com.endava.Entities.message.TransactionMessage;
+import com.endava.Entities.Message.Message;
+import com.endava.Entities.Message.Subscriber;
+import com.endava.Entities.Message.TransactionMessage;
 
 public class AuditModule extends AuditControl implements Subscriber  {
     private AuditControl nextAuditControl;

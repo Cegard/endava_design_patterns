@@ -1,4 +1,4 @@
-package com.endava.Entities.message;
+package com.endava.Entities.Message;
 
 import com.endava.Entities.Client;
 import com.endava.Entities.Employees.Employee;

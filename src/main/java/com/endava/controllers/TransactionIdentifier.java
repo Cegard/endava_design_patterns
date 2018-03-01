@@ -1,7 +1,7 @@
-package com.endava.controllers;
+package com.endava.Controllers;
 
-import com.endava.message.Message;
-import com.endava.message.TransactionMessage;
+import com.endava.Entities.Message.Message;
+import com.endava.Entities.Message.TransactionMessage;
 
 public class TransactionIdentifier extends AuditControl {
     private AuditControl nextAuditControl;

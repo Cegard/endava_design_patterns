@@ -10,7 +10,7 @@ public class EmployeeController {
 
     private static int consecutiveId = 0;
     private HashMap<String, EmployeeCreation> employeesCreationMethods = new HashMap<>();
-    public EmployeesPool employeesPool;
+    private EmployeesPool employeesPool;
 
 
     public EmployeeController(){

@@ -1,8 +1,8 @@
 package com.endava.Controllers;
 
 import com.endava.Entities.Client;
-import com.endava.Entities.message.ConcreteMessageService;
-import com.endava.Entities.message.MessageService;
+import com.endava.Entities.Message.ConcreteMessageService;
+import com.endava.Entities.Message.MessageService;
 import com.endava.legacy.CuponMktService;
 import com.endava.legacy.MktService;
 import java.util.concurrent.CompletableFuture;

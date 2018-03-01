@@ -1,6 +1,6 @@
-package com.endava.controllers;
+package com.endava.Controllers;
 
-import com.endava.message.Message;
+import com.endava.Entities.Message.Message;
 
 public abstract class AuditControl {
     public abstract void setNext (AuditControl auditControl);

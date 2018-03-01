@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
  */
 public class EmployeesPool {
     private EmployeePriorityComparator employeesComparator = new EmployeePriorityComparator();
-    public PriorityQueue<Employee> employeesPool;
+    private PriorityQueue<Employee> employeesPool;
 
 
     public EmployeesPool(){
