@@ -1,10 +1,8 @@
 package com.endava.Controllers;
 
 import com.endava.Entities.Client;
-import com.endava.Entities.Message.ConcreteMessageService;
 import com.endava.Entities.Message.MessageService;
 import com.endava.legacy.CuponMktService;
-import com.endava.legacy.MktService;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,15 +13,12 @@ import java.util.concurrent.Executors;
  */
 public class Dispatcher {
     private ExecutorService executor;
-    private MessageService messageService;
 
     //Singleton nested
     private static Dispatcher instance = new Dispatcher();
 
     private Dispatcher() {
         executor = Executors.newFixedThreadPool(10);
-        messageService = new ConcreteMessageService();
-        addSubscribers();
     }
 
     public static Dispatcher getInstance(){ return instance; }
@@ -32,7 +27,8 @@ public class Dispatcher {
      * This method simulate the attention that a cashier gives to the client
      * @param client represent the customer that the cashier will be attend
      */
-    public void attend(Client client, EmployeeController employeesController) {
+    public void attend(Client client, EmployeeController employeesController,
+                       MessageService messageService) {
         AgentSupplier supplier = new AgentSupplier(employeesController.getFreeAgent());
         Utilities.printInformationOfAssignedEmployee(supplier.getAgent(),
                 client);
@@ -41,13 +37,6 @@ public class Dispatcher {
             Utilities.printTimeSpendWithTheClient(client, supplier.getTimeToAttend());
             messageService.createMessage(client, agent);
         });
-    }
-
-    public void addSubscribers (){
-        AuditModule auditModule = new AuditModule();
-        MktService mktService = new CuponMktService();
-        messageService.addSubscriber(auditModule);
-        messageService.addSubscriber(mktService);
     }
 
     public void shutdownExecutor() {

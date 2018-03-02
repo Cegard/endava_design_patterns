@@ -39,6 +39,5 @@ public class Utilities {
 
         System.out.println("#---------------------------------------------------#");
         System.out.println();
-
     }
 }

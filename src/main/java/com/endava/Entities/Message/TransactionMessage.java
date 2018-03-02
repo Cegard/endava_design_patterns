@@ -24,7 +24,6 @@ public class TransactionMessage extends Message {
         this.transactionDate = customer.getTransaction().getOperationDate();
         this.transactionValue = customer.getTransaction().getOperationValue();
         this.transactionType = customer.getTransaction().getTypeOperation();
-
     }
 
     public String getCustomerId() {

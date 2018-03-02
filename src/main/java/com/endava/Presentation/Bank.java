@@ -1,10 +1,9 @@
 package com.endava.Presentation;
 
-import com.endava.Controllers.EmployeeController;
-import com.endava.Controllers.OperationController;
-import com.endava.Controllers.ClientController;
-import com.endava.Controllers.Dispatcher;
+import com.endava.Controllers.*;
 import com.endava.Entities.Client;
+import com.endava.Entities.Message.MessageService;
+import com.endava.legacy.CuponMktService;
 import com.github.javafaker.Faker;
 
 import java.util.Vector;
@@ -18,10 +17,12 @@ public class Bank {
     private Dispatcher dispatcher = Dispatcher.getInstance();
     private EmployeeController employeeController;
     private static OperationController operationController = new OperationController();
+    private MessageService messageService;
 
 
     public Bank(int numberOfCashiers, int numberOfSupervisors, int numberOfDirectors, int numberOfClients){
         this.employeeController = new EmployeeController();
+        this.messageService = new ConcreteMessageService();
         this.createClients(numberOfClients);
         this.createMultipleEmployeesOfSpecifiedType(numberOfCashiers, "cashier");
         this.createMultipleEmployeesOfSpecifiedType(numberOfSupervisors, "supervisor");
@@ -36,7 +37,7 @@ public class Bank {
     public void attendClients(){
 
         for (Client client : this.clients)
-            dispatcher.attend(client, employeeController);
+            dispatcher.attend(client, employeeController, this.messageService);
     }
 
 
@@ -63,5 +64,10 @@ public class Bank {
 
     public void stopService(){
         this.dispatcher.shutdownExecutor();
+    }
+
+    public void addSubscribers (){
+        messageService.addSubscriber(new AuditModule());
+        messageService.addSubscriber(new CuponMktService());
     }
 }

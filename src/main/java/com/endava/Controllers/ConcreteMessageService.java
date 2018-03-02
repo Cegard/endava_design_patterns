@@ -1,7 +1,12 @@
-package com.endava.Entities.Message;
+package com.endava.Controllers;
 
 import com.endava.Entities.Client;
 import com.endava.Entities.Employees.Employee;
+import com.endava.Entities.Message.Message;
+import com.endava.Entities.Message.MessageService;
+import com.endava.Entities.Message.Subscriber;
+import com.endava.Entities.Message.TransactionMessage;
+import com.endava.legacy.CuponMktService;
 
 import java.util.Vector;
 
@@ -32,7 +37,4 @@ public class ConcreteMessageService implements MessageService {
         transactionMessage.constructMessage(customer,agent);
         notifySubscribers(transactionMessage);
     }
-
-
-
 }
